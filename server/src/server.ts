@@ -1,6 +1,10 @@
 import dns from 'node:dns'
 
-dns.setServers(['8.8.8.8', '1.1.1.1'])
+dns.setServers([
+  '8.8.8.8',
+  '1.1.1.1',
+])
+
 
 import 'dotenv/config'
 import app from './app.js'
@@ -12,7 +16,6 @@ const startServer = async (): Promise<void> => {
   await connectDatabase()
   await verifyEmailTransport()
 
- 
   app.listen(PORT, () => {
     console.log(`CCC API server running on http://localhost:${PORT}`)
   })

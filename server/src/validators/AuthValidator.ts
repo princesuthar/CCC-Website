@@ -79,3 +79,23 @@ export const registerSchema = z
   })
 
 export type RegisterInput = z.infer<typeof registerSchema>
+
+export const emailSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .email('Enter a valid email address')
+    .refine(
+      (email: string) => email.endsWith('@vcet.edu.in'),
+      'Only VCET college email addresses are allowed',
+    ),
+})
+
+export const resetPasswordSchema = z.object({
+  token: z.string().trim().min(1),
+  password: z
+    .string()
+    .min(8, 'Password must contain at least 8 characters')
+    .max(100, 'Password cannot exceed 100 characters'),
+})

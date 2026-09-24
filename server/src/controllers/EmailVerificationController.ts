@@ -1,6 +1,9 @@
 import type { Request, Response } from 'express'
 import EmailVerificationToken from '../models/EmailVerificationToken.js'
 import User from '../models/User.js'
+import {
+  resendVerificationEmail,
+} from '../services/AuthService.js'
 import { hashToken } from '../utils/TokenUtils.js'
 
 export const verifyEmail = async (
@@ -80,6 +83,62 @@ export const verifyEmail = async (
     res.status(500).json({
       success: false,
       message: 'Email verification failed',
+    })
+  }
+}
+
+export const resendVerification = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  try {
+    const email = req.body?.email
+
+    if (
+      typeof email !== 'string' ||
+      !email.trim()
+    ) {
+      res.status(400).json({
+        success: false,
+        message: 'Email is required',
+      })
+
+      return
+    }
+
+    await resendVerificationEmail(
+      email.trim().toLowerCase(),
+    )
+
+    res.status(200).json({
+      success: true,
+      message:
+        'A new verification email has been sent.',
+    })
+  } catch (error) {
+    console.error(
+      'Resend verification failed:',
+      error,
+    )
+
+    if (
+      error instanceof Error &&
+      (error.message ===
+        'No account found with this email' ||
+        error.message ===
+          'This email is already verified')
+    ) {
+      res.status(200).json({
+        success: true,
+        message:
+          'If an eligible account exists, a verification email will be sent.',
+      })
+      return
+    }
+
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send verification email',
     })
   }
 }

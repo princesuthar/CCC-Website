@@ -1,14 +1,14 @@
 import { Schema, model, type Document, type Types } from 'mongoose'
 
-export interface IEmailVerificationToken extends Document {
+export interface IPasswordResetToken extends Document {
   userId: Types.ObjectId
   tokenHash: string
   expiresAt: Date
   createdAt: Date
 }
 
-const emailVerificationTokenSchema =
-  new Schema<IEmailVerificationToken>(
+const passwordResetTokenSchema =
+  new Schema<IPasswordResetToken>(
     {
       userId: {
         type: Schema.Types.ObjectId,
@@ -16,13 +16,11 @@ const emailVerificationTokenSchema =
         required: true,
         index: true,
       },
-
       tokenHash: {
         type: String,
         required: true,
         unique: true,
       },
-
       expiresAt: {
         type: Date,
         required: true,
@@ -36,15 +34,15 @@ const emailVerificationTokenSchema =
     },
   )
 
-emailVerificationTokenSchema.index(
+passwordResetTokenSchema.index(
   { expiresAt: 1 },
   { expireAfterSeconds: 0 },
 )
 
-const EmailVerificationToken =
-  model<IEmailVerificationToken>(
-    'EmailVerificationToken',
-    emailVerificationTokenSchema,
+const PasswordResetToken =
+  model<IPasswordResetToken>(
+    'PasswordResetToken',
+    passwordResetTokenSchema,
   )
 
-export default EmailVerificationToken
+export default PasswordResetToken
