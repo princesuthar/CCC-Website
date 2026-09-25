@@ -8,6 +8,7 @@ import {
   type ArticleCategory,
 } from '../../services/ArticleService'
 import { getApiErrorMessage } from '../../utils/apiError'
+import RichTextEditor from '../components/RichTextEditor'
 
 function ArticleEditorPage() {
   const navigate = useNavigate()
@@ -73,7 +74,10 @@ function ArticleEditorPage() {
           </select>
           <input value={tags} onChange={(event) => setTags(event.target.value)} placeholder="Tags, comma separated" className="rounded-lg border border-slate-300 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-900" />
         </div>
-        <textarea required minLength={50} value={content} onChange={(event) => setContent(event.target.value)} placeholder="Start writing..." rows={16} className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 leading-7 dark:border-slate-700 dark:bg-slate-900" />
+        <div>
+          <p className="mb-2 text-sm font-medium">Article content</p>
+          <RichTextEditor value={content} onChange={setContent} />
+        </div>
         <button disabled={isSaving} className="rounded-lg bg-slate-950 px-5 py-3 font-medium text-white disabled:opacity-50 dark:bg-white dark:text-slate-950">
           {isSaving ? 'Saving...' : 'Save draft'}
         </button>

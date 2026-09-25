@@ -37,8 +37,10 @@ function ArticlePage() {
       <p className="mt-5 text-sm text-slate-500">
         By {article.authorId?.fullName ?? 'CCC contributor'}
       </p>
-      <div className="mt-10 whitespace-pre-wrap border-t border-slate-200 pt-10 text-lg leading-8 dark:border-slate-800">
-        {article.content}
+      <div
+        className="prose mt-10 max-w-none border-t border-slate-200 pt-10 text-lg leading-8 dark:border-slate-800"
+        dangerouslySetInnerHTML={{ __html: article.content }}
+      >
       </div>
     </main>
   )

@@ -87,6 +87,13 @@ history snapshots. The current editor uses a validated structured writing
 surface; TipTap integration and transactional publication notifications remain
 future enhancements rather than prerequisites for the core workflow.
 
+### Phase 6 - Rich article editor
+
+Started on 2026-09-25. The existing structured article editor is being
+upgraded to TipTap with headings, emphasis, lists, undo, and redo while
+retaining the existing draft and review APIs. Article HTML is sanitized on the
+server before storage and rendered as formatted article content.
+
 ## 6. Completed features
 
 ### Existing backend
@@ -269,5 +276,17 @@ rejection, and publication; public article listing and detail routes; and
 frontend author and reviewer workflow pages.  
 **Validation:** Server TypeScript build, client TypeScript/Vite build, and
 nineteen server tests pass.  
-**Future enhancements:** TipTap editing, transactional publication
-notifications, and full database-backed article integration tests.
+**Future enhancements:** Transactional publication notifications and full
+database-backed article integration tests.
+
+## Phase 6 editor report
+
+**Status:** Complete  
+**Implemented:** TipTap React and StarterKit integration in the existing
+article editor, rich text toolbar, formatted published-article rendering,
+server-side HTML allow-list sanitization, and client styling for editor
+content.  
+**Validation:** Dependency installation completed without vulnerabilities;
+server and client builds pass, twenty-one server tests pass, and article
+content sanitization tests cover supported formatting and executable markup
+removal.

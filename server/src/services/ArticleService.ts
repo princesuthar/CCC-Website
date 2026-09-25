@@ -6,6 +6,24 @@ import ArticleVersion, {
 } from '../models/ArticleVersion.js'
 import User from '../models/User.js'
 import type { ArticleInput } from '../validators/ArticleValidator.js'
+import sanitizeHtml from 'sanitize-html'
+
+export const sanitizeArticleContent = (content: string) =>
+  sanitizeHtml(content, {
+    allowedTags: [
+      'p',
+      'br',
+      'strong',
+      'em',
+      'h2',
+      'h3',
+      'ul',
+      'ol',
+      'li',
+      'blockquote',
+    ],
+    allowedAttributes: {},
+  })
 
 const toSlug = (title: string) =>
   title
@@ -91,6 +109,7 @@ export const createArticle = async (
 ) => {
   const article = await Article.create({
     ...input,
+    content: sanitizeArticleContent(input.content),
     tags: [...new Set(input.tags.map((tag) => tag.toLowerCase()))],
     slug: await uniqueSlug(input.title),
     authorId,
@@ -123,7 +142,12 @@ export const updateArticle = async (
     article.slug = await uniqueSlug(input.title, article.id)
   }
 
-  Object.assign(article, input)
+  Object.assign(article, {
+    ...input,
+    ...(input.content
+      ? { content: sanitizeArticleContent(input.content) }
+      : {}),
+  })
   article.reviewNote = undefined
   if (input.tags) {
     article.tags = [

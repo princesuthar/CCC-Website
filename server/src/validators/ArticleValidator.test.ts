@@ -33,10 +33,18 @@ test('article updates may change a subset of fields', () => {
   const result = articleUpdateSchema.safeParse({
     title: 'A revised title for the draft',
   })
-
-  test('review decisions require a useful note', () => {
-    assert.equal(articleReviewSchema.safeParse({ note: 'Please revise the sources.' }).success, true)
-    assert.equal(articleReviewSchema.safeParse({ note: '' }).success, false)
-  })
   assert.equal(result.success, true)
+})
+
+test('review decisions require a useful note', () => {
+  assert.equal(
+    articleReviewSchema.safeParse({
+      note: 'Please revise the sources.',
+    }).success,
+    true,
+  )
+  assert.equal(
+    articleReviewSchema.safeParse({ note: '' }).success,
+    false,
+  )
 })

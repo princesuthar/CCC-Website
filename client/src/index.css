@@ -30,3 +30,24 @@ select {
   transition: color 150ms ease, background-color 150ms ease,
     border-color 150ms ease, opacity 150ms ease;
 }
+
+.ProseMirror {
+  min-height: 16rem;
+  outline: none;
+}
+
+.ProseMirror p {
+  margin: 0.75rem 0;
+}
+
+.ProseMirror h2 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.ProseMirror ul {
+  list-style: disc;
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
