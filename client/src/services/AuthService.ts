@@ -11,6 +11,16 @@ export interface User {
   isEmailVerified: boolean
   isApproved: boolean
   isArchived: boolean
+  collegeId?: string
+  facultyId?: string
+  profilePhoto?: string
+  bio?: string
+  socialLinks?: {
+    instagram?: string
+    linkedin?: string
+    github?: string
+    website?: string
+  }
 }
 
 export interface LoginRequest {

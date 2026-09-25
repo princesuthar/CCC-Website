@@ -15,11 +15,16 @@ import UnauthorizedPage from '../views/pages/UnauthorizedPage'
 import ProtectedRoute from '../views/components/ProtectedRoute'
 import RoleRoute from '../views/components/RoleRoute'
 import RoleDashboardPage from '../views/pages/RoleDashboardPage'
+import PublicProfilePage from '../views/pages/PublicProfilePage'
+import EditProfilePage from '../views/pages/EditProfilePage'
+import AppLayout from '../views/layouts/AppLayout'
+import NotFoundPage from '../views/pages/NotFoundPage'
 
 function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route element={<AppLayout />}>
         <Route
           path="/"
           element={<HomePage />}
@@ -48,6 +53,10 @@ function AppRouter() {
           element={<ResetPasswordPage />}
         />
         <Route
+          path="/u/:username"
+          element={<PublicProfilePage />}
+        />
+        <Route
           path="/unauthorized"
           element={<UnauthorizedPage />}
         />
@@ -55,6 +64,10 @@ function AppRouter() {
           <Route
             path="/dashboard"
             element={<DashboardPage />}
+          />
+          <Route
+            path="/profile/edit"
+            element={<EditProfilePage />}
           />
         </Route>
         <Route
@@ -98,6 +111,8 @@ function AppRouter() {
               <RoleDashboardPage role="admin" />
             }
           />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

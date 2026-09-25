@@ -4,6 +4,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 import rateLimit from 'express-rate-limit'
+import profileRoutes from './routes/ProfileRoutes.js'
 import {
   errorHandler,
   notFoundHandler,
@@ -40,6 +41,7 @@ const authRateLimiter = rateLimit({
 })
 
 app.use('/api/auth', authRateLimiter, authRoutes)
+app.use('/api/profiles', profileRoutes)
 
 app.get('/api/health', (_req, res) => {
   res.status(200).json({

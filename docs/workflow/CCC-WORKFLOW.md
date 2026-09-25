@@ -61,6 +61,22 @@ checks, authorization context, and frontend protected/role-gated route
 boundaries are implemented. Domain-specific protected endpoints will be added
 with their corresponding profile, article, review, and admin phases.
 
+### Phase 3 - User and public profile system
+
+Implementation and manual validation completed on 2026-09-25. Profile storage
+and public/editable profile flows are implemented on top of the Phase 2
+authorization boundaries, and the MongoDB/Cloudinary profile checks have been
+completed.
+
+### Phase 4 - Design system and application shell
+
+Implementation completed on 2026-09-25. The frontend now has a shared
+responsive application layout with navigation, footer, authenticated profile
+and dashboard links, logout, persistent light/dark theme switching, and a
+not-found surface. The homepage has been redesigned as an editorial
+publication landing page while preserving the existing route and
+authentication boundaries.
+
 ## 6. Completed features
 
 ### Existing backend
@@ -88,6 +104,12 @@ with their corresponding profile, article, review, and admin phases.
 - Active-user lookup prevents archived users and stale JWT roles from accessing
   protected resources
 - Authorization context endpoint exposes server-derived capabilities
+- Public profile and profile-editing services/routes
+- Username history persistence and canonical old-username redirects
+- Profile privacy boundary excluding college email and IDs from public profiles
+- Self-service account archival endpoint
+- Cloudinary-backed profile photo upload with JPG/PNG/WebP and 5 MB limits
+- Social-link editing and profile archival controls in the frontend
 
 ### Existing frontend
 
@@ -136,8 +158,8 @@ with their corresponding profile, article, review, and admin phases.
   token utility tests now run with the server test script.
 - Full database-backed lifecycle tests remain outstanding.
 - Domain-specific business endpoints are not implemented yet.
-- The public profile, article, review, publishing, discovery, social, admin,
-  and analytics systems are not implemented.
+- The article, review, publishing, discovery, social, admin, and analytics
+  systems are not implemented.
 - No root-level `.env.example` exists; server placeholders need to include all
   production integrations.
 
@@ -201,3 +223,27 @@ route protection, role-specific route gates, admin gating, and an unauthorized
 page.  
 **Tests:** Twelve server tests pass; server and client builds pass.  
 **Next:** Implement Phase 3 profiles on top of these authorization boundaries.
+
+## Phase 3 profile report
+
+**Status:** Complete  
+**Implemented:** `User` profile fields, `UsernameHistory` model, validated
+profile updates, public `/api/profiles/u/:username` lookup, old-username
+permanent API redirects, public privacy projection, authenticated profile
+editing, social links, self-service account archival, Cloudinary-backed profile
+photo uploads with file validation, and frontend public/edit profile pages.  
+**Tests:** Fifteen server tests pass; server and client builds pass. Manual
+MongoDB, public-profile, username-history, social-link, Cloudinary upload,
+authorization, and archival checks completed.  
+**Next:** Implement Phase 5 publication and article workflows.
+
+## Phase 4 design report
+
+**Status:** Complete  
+**Implemented:** Shared `AppLayout`, responsive navigation and footer,
+theme preference store, light/dark CSS foundation, homepage editorial shell,
+and `NotFoundPage`. Existing protected and role-gated routes remain nested
+under the shared layout.  
+**Validation:** Client TypeScript/Vite production build passes; workspace
+problem scan reports no client errors.  
+**Next:** Implement Phase 5 publication and article workflows.
