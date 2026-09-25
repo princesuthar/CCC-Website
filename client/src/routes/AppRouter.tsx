@@ -19,6 +19,10 @@ import PublicProfilePage from '../views/pages/PublicProfilePage'
 import EditProfilePage from '../views/pages/EditProfilePage'
 import AppLayout from '../views/layouts/AppLayout'
 import NotFoundPage from '../views/pages/NotFoundPage'
+import ArticlesPage from '../views/pages/ArticlesPage'
+import ArticlePage from '../views/pages/ArticlePage'
+import ArticleEditorPage from '../views/pages/ArticleEditorPage'
+import ReviewQueuePage from '../views/pages/ReviewQueuePage'
 
 function AppRouter() {
   return (
@@ -29,6 +33,8 @@ function AppRouter() {
           path="/"
           element={<HomePage />}
         />
+        <Route path="/articles" element={<ArticlesPage />} />
+        <Route path="/articles/:slug" element={<ArticlePage />} />
 
         <Route
           path="/login"
@@ -69,6 +75,14 @@ function AppRouter() {
             path="/profile/edit"
             element={<EditProfilePage />}
           />
+          <Route
+            path="/articles/new"
+            element={<ArticleEditorPage />}
+          />
+          <Route
+            path="/articles/edit/:articleId"
+            element={<ArticleEditorPage />}
+          />
         </Route>
         <Route
           element={
@@ -77,7 +91,7 @@ function AppRouter() {
             />
           }
         >
-          <Route
+         <Route
             path="/student"
             element={
               <RoleDashboardPage role="student" />
@@ -95,7 +109,8 @@ function AppRouter() {
             <RoleRoute allowedRoles={['reviewer']} />
           }
         >
-          <Route
+          <Route path="/review" element={<ReviewQueuePage />} />
+         <Route
             path="/reviewer"
             element={
               <RoleDashboardPage role="reviewer" />
@@ -105,6 +120,7 @@ function AppRouter() {
         <Route
           element={<RoleRoute allowedRoles={['admin']} />}
         >
+          <Route path="/admin/review" element={<ReviewQueuePage />} />
           <Route
             path="/admin"
             element={

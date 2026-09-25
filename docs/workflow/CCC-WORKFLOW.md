@@ -77,6 +77,16 @@ not-found surface. The homepage has been redesigned as an editorial
 publication landing page while preserving the existing route and
 authentication boundaries.
 
+### Phase 5 - Publication and article workflows
+
+Completed on 2026-09-25. The publication workflow now includes approved
+categories and tags, article drafts, author ownership checks, submission
+state, reviewer/admin approval and rejection, public article listing and
+reading routes, authenticated draft editing, reviewer queue UI, and version
+history snapshots. The current editor uses a validated structured writing
+surface; TipTap integration and transactional publication notifications remain
+future enhancements rather than prerequisites for the core workflow.
+
 ## 6. Completed features
 
 ### Existing backend
@@ -235,7 +245,7 @@ photo uploads with file validation, and frontend public/edit profile pages.
 **Tests:** Fifteen server tests pass; server and client builds pass. Manual
 MongoDB, public-profile, username-history, social-link, Cloudinary upload,
 authorization, and archival checks completed.  
-**Next:** Implement Phase 5 publication and article workflows.
+**Next:** Continue with Phase 4 design system and application layout.
 
 ## Phase 4 design report
 
@@ -246,4 +256,18 @@ and `NotFoundPage`. Existing protected and role-gated routes remain nested
 under the shared layout.  
 **Validation:** Client TypeScript/Vite production build passes; workspace
 problem scan reports no client errors.  
-**Next:** Implement Phase 5 publication and article workflows.
+**Next:** Continue Phase 5 with article editing, review, and publishing
+workflow completion.
+
+## Phase 5 publication report
+
+**Status:** Complete  
+**Implemented:** `Article` model with category, tags, ownership, status, slug,
+and publication metadata; validated article input; author draft creation,
+editing, version snapshots, and submission; reviewer/admin queue, approval,
+rejection, and publication; public article listing and detail routes; and
+frontend author and reviewer workflow pages.  
+**Validation:** Server TypeScript build, client TypeScript/Vite build, and
+nineteen server tests pass.  
+**Future enhancements:** TipTap editing, transactional publication
+notifications, and full database-backed article integration tests.

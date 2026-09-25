@@ -36,6 +36,30 @@ function AppLayout() {
             </Link>
             {user ? (
               <>
+                {(user.role === 'student' || user.role === 'teacher') && (
+                  <Link
+                    to="/articles/new"
+                    className="hidden rounded-lg px-3 py-2 hover:bg-slate-100 md:inline-block dark:hover:bg-slate-900"
+                  >
+                    Write
+                  </Link>
+                )}
+                {user.role === 'reviewer' && (
+                  <Link
+                    to="/review"
+                    className="hidden rounded-lg px-3 py-2 hover:bg-slate-100 md:inline-block dark:hover:bg-slate-900"
+                  >
+                    Review
+                  </Link>
+                )}
+                {user.role === 'admin' && (
+                  <Link
+                    to="/admin/review"
+                    className="hidden rounded-lg px-3 py-2 hover:bg-slate-100 md:inline-block dark:hover:bg-slate-900"
+                  >
+                    Review
+                  </Link>
+                )}
                 <Link
                   to="/dashboard"
                   className="rounded-lg px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
